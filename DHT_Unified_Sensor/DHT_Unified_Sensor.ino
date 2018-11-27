@@ -17,7 +17,8 @@
 #define DHTTYPE           DHT11     // DHT 11 
 //#define DHTTYPE           DHT22     // DHT 22 (AM2302)
 //#define DHTTYPE           DHT21     // DHT 21 (AM2301)
-
+int maxTemp;
+int minTemp;
 // See guide for details on sensor wiring and usage:
 //   https://learn.adafruit.com/dht/overview
 
@@ -81,5 +82,10 @@ void loop() {
     Serial.print(event.relative_humidity);
     Serial.println("%");
   }
-  if (
+  if (event.temperature<=minTemp) minTemp=event.temperature;
+  if (event.temperature>=maxTemp) maxTemp=event.temperature;
+    Serial.print("Maxtemp: ");
+    Serial.println(maxTemp);
+    Serial.print("mintemp: ");
+    Serial.println(minTemp);
 }
